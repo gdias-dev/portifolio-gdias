@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guilherme Dias — Desenvolvedor Fullstack</title>
+<meta name="description" content="Portfólio de Guilherme Dias, desenvolvedor fullstack júnior — React, Node.js, Java, Spring Boot e PostgreSQL.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0e1a;
+  --bg-soft:#0f1524;
+  --card:#131b2e;
+  --card-hover:#18223a;
+  --border:#1f2b45;
+  --border-bright:#2c3d61;
+  --text:#e8edf7;
+  --text-dim:#93a1bd;
+  --text-faint:#657193;
+  --accent:#4da3ff;
+  --accent-2:#22d3ee;
+  --accent-glow:rgba(77,163,255,.18);
+  --radius:14px;
+  --maxw:1080px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(700px 500px at 15% -5%, rgba(77,163,255,.13), transparent 60%),
+    radial-gradient(600px 450px at 90% 5%, rgba(34,211,238,.08), transparent 60%);
+  pointer-events:none;
+  z-index:0;
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+/* ---------- NAV ---------- */
+nav{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(14px);
+  background:rgba(10,14,26,.78);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{
+  max-width:var(--maxw);margin:0 auto;padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.brand{
+  font-weight:800;letter-spacing:-.02em;font-size:1.05rem;
+  display:flex;align-items:center;gap:9px;
+}
+.brand .dot{
+  width:9px;height:9px;border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 12px var(--accent);
+}
+.nav-links{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.nav-links a{
+  color:var(--text-dim);text-decoration:none;font-size:.9rem;font-weight:500;
+  padding:7px 12px;border-radius:8px;transition:.2s;
+}
+.nav-links a:hover{color:var(--text);background:var(--card)}
+.lang-btn{
+  background:var(--card);border:1px solid var(--border-bright);color:var(--text);
+  font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:500;
+  padding:7px 12px;border-radius:8px;cursor:pointer;transition:.2s;letter-spacing:.03em;
+}
+.lang-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ---------- HERO ---------- */
+header{padding:88px 0 76px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'JetBrains Mono',monospace;font-size:.8rem;
+  color:var(--accent);background:var(--accent-glow);
+  border:1px solid rgba(77,163,255,.25);
+  padding:6px 14px;border-radius:100px;margin-bottom:22px;
+}
+.pulse{
+  width:7px;height:7px;border-radius:50%;background:#4ade80;
+  box-shadow:0 0 0 0 rgba(74,222,128,.6);
+  animation:pulse 2.2s infinite;
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(74,222,128,.55)}
+  70%{box-shadow:0 0 0 9px rgba(74,222,128,0)}
+  100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}
+}
+h1{
+  font-size:clamp(2.4rem,6.5vw,4rem);
+  font-weight:800;letter-spacing:-.035em;line-height:1.08;margin-bottom:16px;
+}
+h1 .grad{
+  background:linear-gradient(120deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.subtitle{
+  font-size:clamp(1.05rem,2.4vw,1.3rem);
+  color:var(--text-dim);max-width:640px;margin-bottom:30px;
+}
+.hero-meta{
+  display:flex;flex-wrap:wrap;gap:18px;
+  color:var(--text-faint);font-size:.9rem;margin-bottom:32px;
+}
+.hero-meta span{display:flex;align-items:center;gap:7px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:12px 22px;border-radius:10px;text-decoration:none;
+  font-weight:600;font-size:.94rem;transition:.22s;border:1px solid transparent;
+}
+.btn-primary{
+  background:linear-gradient(120deg,var(--accent),#3b8ee6);
+  color:#07101f;box-shadow:0 6px 22px -8px var(--accent);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 28px -8px var(--accent)}
+.btn-ghost{
+  background:var(--card);border-color:var(--border-bright);color:var(--text);
+}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+
+/* ---------- SECTIONS ---------- */
+section{padding:64px 0;border-top:1px solid var(--border)}
+.sec-head{margin-bottom:38px}
+.sec-num{
+  font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--accent);
+  display:block;margin-bottom:8px;
+}
+h2{font-size:clamp(1.6rem,3.6vw,2.1rem);font-weight:700;letter-spacing:-.025em}
+.sec-sub{color:var(--text-faint);margin-top:8px;font-size:.98rem}
+
+/* ---------- ABOUT ---------- */
+.about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:36px;align-items:start}
+.about-text p{color:var(--text-dim);margin-bottom:14px}
+.about-text strong{color:var(--text);font-weight:600}
+.facts{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:22px;
+}
+.fact{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px solid var(--border)}
+.fact:last-child{border-bottom:none}
+.fact-k{color:var(--text-faint);font-size:.86rem}
+.fact-v{font-weight:600;font-size:.9rem;text-align:right}
+
+/* ---------- SKILLS ---------- */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.skill-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:22px;transition:.25s;
+}
+.skill-card:hover{border-color:var(--border-bright);background:var(--card-hover);transform:translateY(-3px)}
+.skill-card h3{
+  font-size:.82rem;text-transform:uppercase;letter-spacing:.09em;
+  color:var(--accent);margin-bottom:14px;font-weight:600;
+}
+.tags{display:flex;flex-wrap:wrap;gap:7px}
+.tag{
+  background:rgba(77,163,255,.09);border:1px solid var(--border-bright);
+  color:var(--text-dim);font-family:'JetBrains Mono',monospace;
+  font-size:.78rem;padding:5px 11px;border-radius:7px;
+}
+
+/* ---------- PROJECTS ---------- */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.proj{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:26px;display:flex;flex-direction:column;gap:14px;transition:.25s;position:relative;overflow:hidden;
+}
+.proj::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(140deg,rgba(77,163,255,.07),transparent 55%);
+  opacity:0;transition:.3s;pointer-events:none;
+}
+.proj:hover{border-color:var(--border-bright);transform:translateY(-4px)}
+.proj:hover::after{opacity:1}
+.proj-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.proj h3{font-size:1.14rem;font-weight:700;letter-spacing:-.015em}
+.proj-icon{
+  width:36px;height:36px;flex-shrink:0;border-radius:9px;
+  background:var(--accent-glow);border:1px solid rgba(77,163,255,.25);
+  display:grid;place-items:center;color:var(--accent);font-size:1rem;
+}
+.proj p{color:var(--text-dim);font-size:.93rem;flex:1}
+.proj-link{
+  color:var(--accent);text-decoration:none;font-size:.85rem;font-weight:600;
+  display:inline-flex;align-items:center;gap:6px;transition:.2s;
+}
+.proj-link:hover{gap:10px}
+.proj-featured{
+  grid-column:1/-1;
+  border-color:var(--border-bright);
+  background:linear-gradient(140deg,var(--card-hover),var(--card));
+}
+.proj-featured h3{font-size:1.35rem}
+.proj-note{
+  font-size:.88rem !important;color:var(--text-faint) !important;
+  border-left:2px solid var(--accent);padding-left:14px;flex:0 !important;
+}
+.badge{
+  align-self:flex-start;
+  font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--accent-2);
+  background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.28);
+  padding:4px 11px;border-radius:100px;
+}
+
+/* ---------- TIMELINE ---------- */
+.timeline{position:relative;padding-left:30px}
+.timeline::before{
+  content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;
+  background:linear-gradient(180deg,var(--accent),var(--border));
+}
+.tl-item{position:relative;padding-bottom:34px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{
+  content:"";position:absolute;left:-30px;top:6px;width:14px;height:14px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--accent);
+}
+.tl-date{
+  font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--accent);margin-bottom:5px;
+}
+.tl-item h3{font-size:1.1rem;font-weight:700;margin-bottom:3px}
+.tl-org{color:var(--text-faint);font-size:.92rem;margin-bottom:12px}
+.tl-item ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.tl-item li{
+  color:var(--text-dim);font-size:.93rem;padding-left:18px;position:relative;
+}
+.tl-item li::before{
+  content:"▹";position:absolute;left:0;color:var(--accent);font-size:.85rem;
+}
+
+/* ---------- CONTACT ---------- */
+.contact-card{
+  background:linear-gradient(140deg,var(--card),var(--bg-soft));
+  border:1px solid var(--border-bright);border-radius:18px;
+  padding:44px 34px;text-align:center;
+}
+.contact-card h2{margin-bottom:12px}
+.contact-card p{color:var(--text-dim);max-width:520px;margin:0 auto 28px}
+.contact-links{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+
+footer{
+  padding:32px 0 44px;text-align:center;color:var(--text-faint);font-size:.85rem;
+  border-top:1px solid var(--border);
+}
+
+/* ---------- CONTACT MODAL ---------- */
+.modal-overlay{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(5,8,16,.72);backdrop-filter:blur(6px);
+  display:grid;place-items:center;padding:24px;
+  opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;
+}
+.modal-overlay.open{opacity:1;visibility:visible}
+.modal{
+  background:linear-gradient(150deg,var(--card-hover),var(--bg-soft));
+  border:1px solid var(--border-bright);border-radius:18px;
+  width:100%;max-width:420px;padding:30px 26px 26px;position:relative;
+  transform:translateY(14px) scale(.98);transition:transform .25s;
+  box-shadow:0 24px 60px -20px rgba(0,0,0,.7);
+}
+.modal-overlay.open .modal{transform:none}
+.modal h3{font-size:1.3rem;font-weight:700;letter-spacing:-.02em;margin-bottom:5px}
+.modal .modal-sub{color:var(--text-faint);font-size:.9rem;margin-bottom:22px}
+.modal-close{
+  position:absolute;top:14px;right:14px;
+  background:transparent;border:none;color:var(--text-faint);
+  font-size:1.35rem;line-height:1;cursor:pointer;padding:6px;border-radius:8px;transition:.2s;
+}
+.modal-close:hover{color:var(--text);background:var(--card)}
+.contact-opt{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 16px;margin-bottom:10px;
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  text-decoration:none;color:var(--text);transition:.22s;
+}
+.contact-opt:last-child{margin-bottom:0}
+.contact-opt:hover{border-color:var(--accent);background:var(--card-hover);transform:translateX(3px)}
+.contact-opt .ico{
+  width:40px;height:40px;flex-shrink:0;border-radius:10px;
+  display:grid;place-items:center;font-size:1.15rem;
+  background:var(--accent-glow);border:1px solid rgba(77,163,255,.22);
+}
+.contact-opt .txt{display:flex;flex-direction:column;min-width:0}
+.contact-opt .txt b{font-size:.95rem;font-weight:600}
+.contact-opt .txt span{
+  font-size:.82rem;color:var(--text-faint);
+  font-family:'JetBrains Mono',monospace;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.contact-opt .arrow{margin-left:auto;color:var(--text-faint);transition:.22s}
+.contact-opt:hover .arrow{color:var(--accent);transform:translateX(3px)}
+
+/* ---------- REVEAL ---------- */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.on{opacity:1;transform:none}
+
+@media (max-width:760px){
+  .about-grid{grid-template-columns:1fr}
+  .nav-links a{display:none}
+  .nav-links .lang-btn{display:block}
+  header{padding:56px 0 48px}
+  section{padding:50px 0}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="brand"><span class="dot"></span>Guilherme Dias</div>
+    <div class="nav-links">
+      <a href="#sobre" data-pt="Sobre" data-en="About">Sobre</a>
+      <a href="#skills" data-pt="Skills" data-en="Skills">Skills</a>
+      <a href="#projetos" data-pt="Projetos" data-en="Projects">Projetos</a>
+      <a href="#experiencia" data-pt="Experiência" data-en="Experience">Experiência</a>
+      <a href="#contato" data-pt="Contato" data-en="Contact">Contato</a>
+      <button class="lang-btn" id="langBtn" onclick="toggleLang()">EN</button>
+    </div>
+  </div>
+</nav>
+
+<header class="wrap">
+  <div class="eyebrow">
+    <span class="pulse"></span>
+    <span data-pt="Disponível para oportunidades" data-en="Available for opportunities">Disponível para oportunidades</span>
+  </div>
+  <h1>
+    <span data-pt="Desenvolvedor" data-en="Fullstack">Desenvolvedor</span><br>
+    <span class="grad" data-pt="Fullstack Júnior" data-en="Junior Developer">Fullstack Júnior</span>
+  </h1>
+  <p class="subtitle"
+     data-pt="Construo aplicações web ponta a ponta — interfaces em React no front-end e APIs em Node.js e Spring Boot no back-end, com PostgreSQL. Foco em código limpo, aprendizado rápido e entrega de valor real."
+     data-en="I build web applications end to end — React interfaces on the front-end and Node.js and Spring Boot APIs on the back-end, with PostgreSQL. Focused on clean code, fast learning and delivering real value.">
+    Construo aplicações web ponta a ponta — interfaces em React no front-end e APIs em Node.js e Spring Boot no back-end, com PostgreSQL. Foco em código limpo, aprendizado rápido e entrega de valor real.
+  </p>
+  <div class="hero-meta">
+    <span>📍 <span data-pt="Rio de Janeiro, RJ" data-en="Rio de Janeiro, Brazil">Rio de Janeiro, RJ</span></span>
+    <span>🎓 <span data-pt="Análise e Desenvolvimento de Sistemas" data-en="Systems Analysis & Development">Análise e Desenvolvimento de Sistemas</span></span>
+    <span>🗣️ <span data-pt="Português · Inglês fluente · Espanhol" data-en="Portuguese · Fluent English · Spanish">Português · Inglês fluente · Espanhol</span></span>
+  </div>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="#projetos" data-pt="Ver projetos" data-en="View projects">Ver projetos</a>
+    <a class="btn btn-ghost" href="https://github.com/gdias-dev" target="_blank" rel="noopener">GitHub ↗</a>
+    <button class="btn btn-ghost" onclick="openContact()" data-pt="Entrar em contato" data-en="Get in touch">Entrar em contato</button>
+  </div>
+</header>
+
+<!-- SOBRE -->
+<section id="sobre" class="wrap reveal">
+  <div class="sec-head">
+    <span class="sec-num">01</span>
+    <h2 data-pt="Sobre mim" data-en="About me">Sobre mim</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p data-pt="Sou desenvolvedor fullstack júnior, formado tecnicamente em Informática e cursando Análise e Desenvolvimento de Sistemas na UNISUAM. Passei os últimos anos colocando a mão no código de verdade: desenvolvendo e mantendo funcionalidades em aplicações web reais, participando de sprints em metodologia ágil e trabalhando lado a lado com times de produto e design."
+         data-en="I'm a junior fullstack developer with a technical degree in IT, currently studying Systems Analysis and Development at UNISUAM. I've spent the last few years writing real production code: developing and maintaining features in live web applications, taking part in agile sprints and working side by side with product and design teams.">
+        Sou desenvolvedor fullstack júnior, formado tecnicamente em Informática e cursando Análise e Desenvolvimento de Sistemas na UNISUAM. Passei os últimos anos colocando a mão no código de verdade: desenvolvendo e mantendo funcionalidades em aplicações web reais, participando de sprints em metodologia ágil e trabalhando lado a lado com times de produto e design.
+      </p>
+      <p data-pt="Gosto de entender o problema inteiro — do banco de dados até a tela. Já otimizei consultas SQL em PostgreSQL para ganhar performance, construí APIs REST com autenticação e também cuidei de redes, servidores e automações com n8n."
+         data-en="I like understanding the whole problem — from the database to the screen. I've optimized SQL queries in PostgreSQL for performance, built REST APIs with authentication, and also handled networks, servers and automations with n8n.">
+        Gosto de entender o problema inteiro — do banco de dados até a tela. Já otimizei consultas SQL em PostgreSQL para ganhar performance, construí APIs REST com autenticação e também cuidei de redes, servidores e automações com n8n.
+      </p>
+      <p data-pt="Busco uma oportunidade onde eu possa aprofundar meus conhecimentos, contribuir com soluções eficientes e crescer tecnicamente em um ambiente colaborativo."
+         data-en="I'm looking for an opportunity where I can deepen my knowledge, contribute efficient solutions and grow technically in a collaborative environment.">
+        Busco uma oportunidade onde eu possa aprofundar meus conhecimentos, contribuir com soluções eficientes e crescer tecnicamente em um ambiente colaborativo.
+      </p>
+    </div>
+    <div class="facts">
+      <div class="fact">
+        <span class="fact-k" data-pt="Localização" data-en="Location">Localização</span>
+        <span class="fact-v" data-pt="Rio de Janeiro, RJ" data-en="Rio de Janeiro, Brazil">Rio de Janeiro, RJ</span>
+      </div>
+      <div class="fact">
+        <span class="fact-k" data-pt="Formação" data-en="Education">Formação</span>
+        <span class="fact-v" data-pt="ADS — UNISUAM (cursando)" data-en="Systems Dev — UNISUAM (ongoing)">ADS — UNISUAM (cursando)</span>
+      </div>
+      <div class="fact">
+        <span class="fact-k" data-pt="Experiência" data-en="Experience">Experiência</span>
+        <span class="fact-v" data-pt="2+ anos com desenvolvimento web" data-en="2+ years in web development">2+ anos com desenvolvimento web</span>
+      </div>
+      <div class="fact">
+        <span class="fact-k" data-pt="Foco" data-en="Focus">Foco</span>
+        <span class="fact-v">React · Node.js · Java</span>
+      </div>
+      <div class="fact">
+        <span class="fact-k" data-pt="Inglês" data-en="English">Inglês</span>
+        <span class="fact-v" data-pt="Fluente" data-en="Fluent">Fluente</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="wrap reveal">
+  <div class="sec-head">
+    <span class="sec-num">02</span>
+    <h2 data-pt="Habilidades técnicas" data-en="Technical skills">Habilidades técnicas</h2>
+    <p class="sec-sub" data-pt="Tecnologias que uso no dia a dia e em projetos próprios." data-en="Technologies I use daily and in personal projects.">Tecnologias que uso no dia a dia e em projetos próprios.</p>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <h3 data-pt="Linguagens" data-en="Languages">Linguagens</h3>
+      <div class="tags"><span class="tag">Java</span><span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">PHP</span><span class="tag">Python</span><span class="tag">SQL</span></div>
+    </div>
+    <div class="skill-card">
+      <h3>Front-end</h3>
+      <div class="tags"><span class="tag">React</span><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">Responsive Design</span></div>
+    </div>
+    <div class="skill-card">
+      <h3>Back-end</h3>
+      <div class="tags"><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">Spring Boot</span><span class="tag">REST APIs</span></div>
+    </div>
+    <div class="skill-card">
+      <h3 data-pt="Banco de dados" data-en="Databases">Banco de dados</h3>
+      <div class="tags"><span class="tag">PostgreSQL</span><span class="tag">MySQL</span><span class="tag">Query optimization</span><span class="tag" data-pt="Modelagem" data-en="Data modeling">Modelagem</span></div>
+    </div>
+    <div class="skill-card">
+      <h3 data-pt="Ferramentas" data-en="Tools">Ferramentas</h3>
+      <div class="tags"><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">n8n</span><span class="tag">Scrum</span></div>
+    </div>
+    <div class="skill-card">
+      <h3 data-pt="Infraestrutura" data-en="Infrastructure">Infraestrutura</h3>
+      <div class="tags"><span class="tag" data-pt="Redes" data-en="Networks">Redes</span><span class="tag" data-pt="Servidores" data-en="Servers">Servidores</span><span class="tag" data-pt="Automações" data-en="Automation">Automações</span></div>
+    </div>
+    <div class="skill-card">
+      <h3 data-pt="IA & Automação" data-en="AI & Automation">IA &amp; Automação</h3>
+      <div class="tags"><span class="tag">OpenAI API</span><span class="tag">RAG</span><span class="tag">Vector Store</span><span class="tag">Supabase</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETOS -->
+<section id="projetos" class="wrap reveal">
+  <div class="sec-head">
+    <span class="sec-num">03</span>
+    <h2 data-pt="Projetos" data-en="Projects">Projetos</h2>
+    <p class="sec-sub" data-pt="Projetos pessoais construídos do zero — código disponível no GitHub." data-en="Personal projects built from scratch — source available on GitHub.">Projetos pessoais construídos do zero — código disponível no GitHub.</p>
+  </div>
+  <div class="proj-grid">
+
+    <article class="proj proj-featured">
+      <div class="proj-top">
+        <h3 data-pt="Mapa de Clientes RJ — Painel Comercial" data-en="RJ Client Map — Sales Dashboard">Mapa de Clientes RJ — Painel Comercial</h3>
+        <div class="proj-icon">🗺️</div>
+      </div>
+      <span class="badge" data-pt="Projeto em destaque" data-en="Featured project">Projeto em destaque</span>
+      <p data-pt="Sistema completo de gestão comercial com mapa interativo dos clientes no Rio de Janeiro. Cada ponto no mapa muda de cor automaticamente na primeira compra do cliente, via trigger no banco. Inclui autenticação JWT, dashboard de vendas, importação de planilhas em duas etapas (prévia e gravação em transação), validação de CNPJ por dígito verificador e exportação de relatórios em PDF e XLSX — ambos com geradores escritos do zero, sem bibliotecas externas, para caber no limite de memória da hospedagem compartilhada."
+         data-en="Full sales management system with an interactive map of clients across Rio de Janeiro. Each map pin changes color automatically on the client's first purchase, via a database trigger. Includes JWT authentication, a sales dashboard, two-step spreadsheet import (preview then transactional write), CNPJ validation with check digits, and PDF/XLSX report export — both writers built from scratch, with no external libraries, to fit the memory limits of shared hosting.">
+        Sistema completo de gestão comercial com mapa interativo dos clientes no Rio de Janeiro. Cada ponto no mapa muda de cor automaticamente na primeira compra do cliente, via trigger no banco. Inclui autenticação JWT, dashboard de vendas, importação de planilhas em duas etapas (prévia e gravação em transação), validação de CNPJ por dígito verificador e exportação de relatórios em PDF e XLSX — ambos com geradores escritos do zero, sem bibliotecas externas, para caber no limite de memória da hospedagem compartilhada.
+      </p>
+      <p class="proj-note"
+         data-pt="Migrei o back-end de Node.js/PostgreSQL para PHP 8/MySQL mantendo os mesmos endpoints e o mesmo contrato de JSON, para rodar em hospedagem compartilhada sem Composer nem dependências externas."
+         data-en="I migrated the back-end from Node.js/PostgreSQL to PHP 8/MySQL keeping the same endpoints and the same JSON contract, so it runs on shared hosting with no Composer and no external dependencies.">
+        Migrei o back-end de Node.js/PostgreSQL para PHP 8/MySQL mantendo os mesmos endpoints e o mesmo contrato de JSON, para rodar em hospedagem compartilhada sem Composer nem dependências externas.
+      </p>
+      <div class="tags"><span class="tag">React</span><span class="tag">PHP 8</span><span class="tag">MySQL</span><span class="tag">JWT</span><span class="tag">Vite</span><span class="tag">REST API</span></div>
+      <a class="proj-link" href="https://github.com/gdias-dev/mapa_clientesRJ" target="_blank" rel="noopener" data-pt="Ver no GitHub →" data-en="View on GitHub →">Ver no GitHub →</a>
+    </article>
+
+    <article class="proj proj-featured">
+      <div class="proj-top">
+        <h3 data-pt="Nina — Agente de IA para atendimento" data-en="Nina — AI Customer Service Agent">Nina — Agente de IA para atendimento</h3>
+        <div class="proj-icon">🤖</div>
+      </div>
+      <span class="badge" data-pt="Em produção" data-en="In production">Em produção</span>
+      <p data-pt="Agente conversacional de IA que automatiza o atendimento de um laboratório óptico no WhatsApp. Gera orçamentos de lentes consultando um vector store com o catálogo e a tabela de preços reais (RAG), o que mantém as respostas ancoradas em dados verdadeiros e reduz alucinações. Processa imagens de receitas médicas com OpenAI Vision para extrair o grau e outras informações do orçamento."
+         data-en="Conversational AI agent that automates customer service for an optical lab over WhatsApp. It generates lens quotes by querying a vector store containing the real product catalog and price list (RAG), which keeps answers grounded in actual data and reduces hallucinations. It processes prescription images with OpenAI Vision to extract lens grade and other quote details.">
+        Agente conversacional de IA que automatiza o atendimento de um laboratório óptico no WhatsApp. Gera orçamentos de lentes consultando um vector store com o catálogo e a tabela de preços reais (RAG), o que mantém as respostas ancoradas em dados verdadeiros e reduz alucinações. Processa imagens de receitas médicas com OpenAI Vision para extrair o grau e outras informações do orçamento.
+      </p>
+      <p class="proj-note"
+         data-pt="O ponto central do design é o handoff humano: uma flag de estado no Supabase silencia a IA assim que um atendente assume a conversa, evitando respostas duplicadas — a transição é transparente para o cliente, sem comandos especiais."
+         data-en="The core design decision is the human handoff: a state flag in Supabase silences the AI as soon as a human agent takes over, preventing duplicate replies — the transition is invisible to the customer, with no special commands needed.">
+        O ponto central do design é o handoff humano: uma flag de estado no Supabase silencia a IA assim que um atendente assume a conversa, evitando respostas duplicadas — a transição é transparente para o cliente, sem comandos especiais.
+      </p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">n8n</span><span class="tag">OpenAI API</span><span class="tag">Supabase</span><span class="tag">RAG</span><span class="tag">Vector Store</span></div>
+      <a class="proj-link" href="https://github.com/gdias-dev/nina-Ai" target="_blank" rel="noopener" data-pt="Ver no GitHub →" data-en="View on GitHub →">Ver no GitHub →</a>
+    </article>
+
+    <article class="proj proj-featured">
+      <div class="proj-top">
+        <h3 data-pt="Sistema de Gestão de Estoque" data-en="Inventory Management System">Sistema de Gestão de Estoque</h3>
+        <div class="proj-icon">📦</div>
+      </div>
+      <span class="badge" data-pt="Em produção" data-en="In production">Em produção</span>
+      <p data-pt="Controle de estoque de um laboratório óptico, com inventário de lentes organizado em matriz óptica (esférico × cilíndrico e bases × adição, com colunas separadas por olho), gestão de unidades avulsas com casamento automático de pares compatíveis, baixa por ordem de serviço em transação única, insumos de montagem e surfaçagem, balanço de perdas e alertas automáticos de reposição por e-mail."
+         data-en="Inventory control for an optical laboratory, with lens stock organised as an optical matrix (sphere × cylinder and base × addition, with separate columns per eye), management of single units with automatic matching of compatible pairs, stock deduction per work order in a single transaction, assembly and surfacing supplies, loss reporting and automatic restock alerts by email.">
+        Controle de estoque de um laboratório óptico, com inventário de lentes organizado em matriz óptica (esférico × cilíndrico e bases × adição, com colunas separadas por olho), gestão de unidades avulsas com casamento automático de pares compatíveis, baixa por ordem de serviço em transação única, insumos de montagem e surfaçagem, balanço de perdas e alertas automáticos de reposição por e-mail.
+      </p>
+      <p class="proj-note"
+         data-pt="Controle de concorrência foi o ponto crítico: toda alteração de saldo abre transação e trava a linha com SELECT … FOR UPDATE, então dois operadores baixando a mesma lente ao mesmo tempo não conseguem zerar o estoque errado. O cliente SMTP também foi escrito do zero — com STARTTLS, AUTH LOGIN e corpo multipart — porque a hospedagem compartilhada não permitia Composer para instalar uma biblioteca."
+         data-en="Concurrency control was the critical piece: every stock change opens a transaction and locks the row with SELECT … FOR UPDATE, so two operators deducting the same lens at the same time cannot corrupt the balance. The SMTP client was also written from scratch — with STARTTLS, AUTH LOGIN and a multipart body — because the shared hosting had no Composer to install a library.">
+        Controle de concorrência foi o ponto crítico: toda alteração de saldo abre transação e trava a linha com SELECT … FOR UPDATE, então dois operadores baixando a mesma lente ao mesmo tempo não conseguem zerar o estoque errado. O cliente SMTP também foi escrito do zero — com STARTTLS, AUTH LOGIN e corpo multipart — porque a hospedagem compartilhada não permitia Composer para instalar uma biblioteca.
+      </p>
+      <div class="tags"><span class="tag">PHP 8</span><span class="tag">PDO</span><span class="tag">MySQL</span><span class="tag">SQL Transactions</span><span class="tag">SMTP</span><span class="tag">CSRF</span><span class="tag">bcrypt</span></div>
+      <a class="proj-link" href="https://github.com/gdias-dev/inventory-control" target="_blank" rel="noopener" data-pt="Ver no GitHub →" data-en="View on GitHub →">Ver no GitHub →</a>
+    </article>
+
+    <article class="proj">
+      <div class="proj-top">
+        <h3 data-pt="API de Controle Financeiro" data-en="Personal Finance API">API de Controle Financeiro</h3>
+        <div class="proj-icon">💰</div>
+      </div>
+      <p data-pt="API RESTful para gerenciamento de receitas e despesas, com autenticação de usuários e endpoints para geração de relatórios financeiros mensais."
+         data-en="RESTful API for managing income and expenses, with user authentication and endpoints for generating monthly financial reports.">
+        API RESTful para gerenciamento de receitas e despesas, com autenticação de usuários e endpoints para geração de relatórios financeiros mensais.
+      </p>
+      <div class="tags"><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">PostgreSQL</span></div>
+      <a class="proj-link" href="https://github.com/gdias-dev/finance-control-api" target="_blank" rel="noopener" data-pt="Ver no GitHub →" data-en="View on GitHub →">Ver no GitHub →</a>
+    </article>
+
+    <article class="proj">
+      <div class="proj-top">
+        <h3 data-pt="Sistema de Previsão do Tempo" data-en="Weather Forecast App">Sistema de Previsão do Tempo</h3>
+        <div class="proj-icon">🌤️</div>
+      </div>
+      <p data-pt="Aplicação que consome API pública de clima para exibir previsões em tempo real por localização, com interface totalmente responsiva."
+         data-en="Application that consumes a public weather API to display real-time forecasts by location, with a fully responsive interface.">
+        Aplicação que consome API pública de clima para exibir previsões em tempo real por localização, com interface totalmente responsiva.
+      </p>
+      <div class="tags"><span class="tag">React</span><span class="tag">JavaScript</span><span class="tag">REST API</span></div>
+      <a class="proj-link" href="https://github.com/gdias-dev/weatherwise-fullstack" target="_blank" rel="noopener" data-pt="Ver no GitHub →" data-en="View on GitHub →">Ver no GitHub →</a>
+    </article>
+
+    <article class="proj">
+      <div class="proj-top">
+        <h3 data-pt="Sistema de Controle de Ponto" data-en="Time Clock System">Sistema de Controle de Ponto</h3>
+        <div class="proj-icon">⏱️</div>
+      </div>
+      <p data-pt="Sistema para registro e gestão de ponto eletrônico de colaboradores, com cálculo automático de horas trabalhadas e geração de relatórios."
+         data-en="System for recording and managing employee time clock entries, with automatic calculation of hours worked and report generation.">
+        Sistema para registro e gestão de ponto eletrônico de colaboradores, com cálculo automático de horas trabalhadas e geração de relatórios.
+      </p>
+      <div class="tags"><span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">PostgreSQL</span></div>
+      <a class="proj-link" href="https://github.com/gdias-dev/controle_de_ponto" target="_blank" rel="noopener" data-pt="Ver no GitHub →" data-en="View on GitHub →">Ver no GitHub →</a>
+    </article>
+
+    <article class="proj">
+      <div class="proj-top">
+        <h3 data-pt="Cafeteria Online" data-en="Online Coffee Shop">Cafeteria Online</h3>
+        <div class="proj-icon">☕</div>
+      </div>
+      <p data-pt="Sistema de pedidos para cafeteria com catálogo de produtos, carrinho de compras e painel administrativo para gestão de pedidos."
+         data-en="Ordering system for a coffee shop with product catalog, shopping cart and an admin dashboard for order management.">
+        Sistema de pedidos para cafeteria com catálogo de produtos, carrinho de compras e painel administrativo para gestão de pedidos.
+      </p>
+      <div class="tags"><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">Node.js</span></div>
+      <a class="proj-link" href="https://github.com/gdias-dev/tcc" target="_blank" rel="noopener" data-pt="Ver no GitHub →" data-en="View on GitHub →">Ver no GitHub →</a>
+    </article>
+
+  </div>
+</section>
+
+<!-- EXPERIENCIA -->
+<section id="experiencia" class="wrap reveal">
+  <div class="sec-head">
+    <span class="sec-num">04</span>
+    <h2 data-pt="Experiência & formação" data-en="Experience & education">Experiência &amp; formação</h2>
+  </div>
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-date">jan/2024 — jun/2026</div>
+      <h3 data-pt="Desenvolvedor Fullstack Júnior (estágio)" data-en="Junior Fullstack Developer (internship)">Desenvolvedor Fullstack Júnior (estágio)</h3>
+      <div class="tl-org">Nova Varonil</div>
+      <ul>
+        <li data-pt="Desenvolvimento e manutenção de funcionalidades em aplicações web com React no front-end e Node.js/Express no back-end."
+            data-en="Developed and maintained features in web applications using React on the front-end and Node.js/Express on the back-end.">
+          Desenvolvimento e manutenção de funcionalidades em aplicações web com React no front-end e Node.js/Express no back-end.
+        </li>
+        <li data-pt="Participação em reuniões de sprint (Scrum) e colaboração direta com times de produto e design."
+            data-en="Took part in sprint meetings (Scrum) and collaborated directly with product and design teams.">
+          Participação em reuniões de sprint (Scrum) e colaboração direta com times de produto e design.
+        </li>
+        <li data-pt="Criação e otimização de consultas SQL em PostgreSQL para melhoria de performance."
+            data-en="Wrote and optimized SQL queries in PostgreSQL to improve performance.">
+          Criação e otimização de consultas SQL em PostgreSQL para melhoria de performance.
+        </li>
+        <li data-pt="Manutenção de redes e servidores, e desenvolvimento de automações com n8n."
+            data-en="Maintained networks and servers, and built automations with n8n.">
+          Manutenção de redes e servidores, e desenvolvimento de automações com n8n.
+        </li>
+      </ul>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date" data-pt="Em andamento" data-en="Ongoing">Em andamento</div>
+      <h3 data-pt="Análise e Desenvolvimento de Sistemas" data-en="Systems Analysis & Development">Análise e Desenvolvimento de Sistemas</h3>
+      <div class="tl-org">UNISUAM</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date" data-pt="Concluído" data-en="Completed">Concluído</div>
+      <h3 data-pt="Técnico em Informática" data-en="Technical Degree in IT">Técnico em Informática</h3>
+      <div class="tl-org">Colégio CELC</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato" class="wrap reveal">
+  <div class="contact-card">
+    <span class="sec-num">05</span>
+    <h2 data-pt="Vamos conversar?" data-en="Let's talk?">Vamos conversar?</h2>
+    <p data-pt="Estou aberto a oportunidades como desenvolvedor fullstack júnior. Se acha que posso somar ao seu time, é só chamar."
+       data-en="I'm open to junior fullstack developer opportunities. If you think I could add value to your team, get in touch.">
+      Estou aberto a oportunidades como desenvolvedor fullstack júnior. Se acha que posso somar ao seu time, é só chamar.
+    </p>
+    <div class="contact-links">
+      <a class="btn btn-primary" href="mailto:guinascimento2007@gmail.com">✉️ guinascimento2007@gmail.com</a>
+      <a class="btn btn-ghost" href="https://wa.me/5521965567249" target="_blank" rel="noopener">📱 (21) 96556-7249</a>
+      <a class="btn btn-ghost" href="https://github.com/gdias-dev" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/guilherme-dias-fullstackdev" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span data-pt="Feito com HTML, CSS e JavaScript por Guilherme Dias · 2026" data-en="Built with HTML, CSS and JavaScript by Guilherme Dias · 2026">Feito com HTML, CSS e JavaScript por Guilherme Dias · 2026</span>
+  </div>
+</footer>
+
+<!-- MODAL DE CONTATO -->
+<div class="modal-overlay" id="contactModal" onclick="if(event.target===this)closeContact()">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" onclick="closeContact()" aria-label="Fechar">×</button>
+    <h3 id="modalTitle" data-pt="Entrar em contato" data-en="Get in touch">Entrar em contato</h3>
+    <p class="modal-sub" data-pt="Escolha o canal que preferir — respondo rápido." data-en="Pick whichever channel you prefer — I reply fast.">Escolha o canal que preferir — respondo rápido.</p>
+
+    <a class="contact-opt" href="mailto:guinascimento2007@gmail.com">
+      <span class="ico">✉️</span>
+      <span class="txt">
+        <b data-pt="E-mail" data-en="Email">E-mail</b>
+        <span>guinascimento2007@gmail.com</span>
+      </span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="contact-opt" href="https://wa.me/5521965567249" target="_blank" rel="noopener">
+      <span class="ico">💬</span>
+      <span class="txt">
+        <b>WhatsApp</b>
+        <span>+55 (21) 96556-7249</span>
+      </span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="contact-opt" href="https://www.linkedin.com/in/guilherme-dias-fullstackdev" target="_blank" rel="noopener">
+      <span class="ico">💼</span>
+      <span class="txt">
+        <b>LinkedIn</b>
+        <span>in/guilherme-dias-fullstackdev</span>
+      </span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="contact-opt" href="https://github.com/gdias-dev" target="_blank" rel="noopener">
+      <span class="ico">🐙</span>
+      <span class="txt">
+        <b>GitHub</b>
+        <span>github.com/gdias-dev</span>
+      </span>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<script>
+let lang = 'pt';
+
+function openContact(){
+  document.getElementById('contactModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeContact(){
+  document.getElementById('contactModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeContact(); });
+function toggleLang(){
+  lang = lang === 'pt' ? 'en' : 'pt';
+  document.querySelectorAll('[data-pt]').forEach(el=>{
+    const v = el.getAttribute('data-' + lang);
+    if(v) el.textContent = v;
+  });
+  document.getElementById('langBtn').textContent = lang === 'pt' ? 'EN' : 'PT';
+  document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+}
+
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
