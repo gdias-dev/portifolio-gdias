@@ -491,6 +491,25 @@ footer{
       <a class="proj-link" href="https://github.com/gdias-dev/nina-Ai" target="_blank" rel="noopener" data-pt="Ver no GitHub →" data-en="View on GitHub →">Ver no GitHub →</a>
     </article>
 
+    <article class="proj proj-featured">
+      <div class="proj-top">
+        <h3 data-pt="Sistema de Gestão de Estoque" data-en="Inventory Management System">Sistema de Gestão de Estoque</h3>
+        <div class="proj-icon">📦</div>
+      </div>
+      <span class="badge" data-pt="Em produção" data-en="In production">Em produção</span>
+      <p data-pt="Controle de estoque de um laboratório óptico, com inventário de lentes organizado em matriz óptica (esférico × cilíndrico e bases × adição, com colunas separadas por olho), gestão de unidades avulsas com casamento automático de pares compatíveis, baixa por ordem de serviço em transação única, insumos de montagem e surfaçagem, balanço de perdas e alertas automáticos de reposição por e-mail."
+         data-en="Inventory control for an optical laboratory, with lens stock organised as an optical matrix (sphere × cylinder and base × addition, with separate columns per eye), management of single units with automatic matching of compatible pairs, stock deduction per work order in a single transaction, assembly and surfacing supplies, loss reporting and automatic restock alerts by email.">
+        Controle de estoque de um laboratório óptico, com inventário de lentes organizado em matriz óptica (esférico × cilíndrico e bases × adição, com colunas separadas por olho), gestão de unidades avulsas com casamento automático de pares compatíveis, baixa por ordem de serviço em transação única, insumos de montagem e surfaçagem, balanço de perdas e alertas automáticos de reposição por e-mail.
+      </p>
+      <p class="proj-note"
+         data-pt="Controle de concorrência foi o ponto crítico: toda alteração de saldo abre transação e trava a linha com SELECT … FOR UPDATE, então dois operadores baixando a mesma lente ao mesmo tempo não conseguem zerar o estoque errado. O cliente SMTP também foi escrito do zero — com STARTTLS, AUTH LOGIN e corpo multipart — porque a hospedagem compartilhada não permitia Composer para instalar uma biblioteca."
+         data-en="Concurrency control was the critical piece: every stock change opens a transaction and locks the row with SELECT … FOR UPDATE, so two operators deducting the same lens at the same time cannot corrupt the balance. The SMTP client was also written from scratch — with STARTTLS, AUTH LOGIN and a multipart body — because the shared hosting had no Composer to install a library.">
+        Controle de concorrência foi o ponto crítico: toda alteração de saldo abre transação e trava a linha com SELECT … FOR UPDATE, então dois operadores baixando a mesma lente ao mesmo tempo não conseguem zerar o estoque errado. O cliente SMTP também foi escrito do zero — com STARTTLS, AUTH LOGIN e corpo multipart — porque a hospedagem compartilhada não permitia Composer para instalar uma biblioteca.
+      </p>
+      <div class="tags"><span class="tag">PHP 8</span><span class="tag">PDO</span><span class="tag">MySQL</span><span class="tag">SQL Transactions</span><span class="tag">SMTP</span><span class="tag">CSRF</span><span class="tag">bcrypt</span></div>
+      <a class="proj-link" href="https://github.com/gdias-dev/inventory-control" target="_blank" rel="noopener" data-pt="Ver no GitHub →" data-en="View on GitHub →">Ver no GitHub →</a>
+    </article>
+
     <article class="proj">
       <div class="proj-top">
         <h3 data-pt="API de Controle Financeiro" data-en="Personal Finance API">API de Controle Financeiro</h3>
